@@ -31,12 +31,20 @@ def reshape_data(df):
 
 inbound_tourists_clean = data_selection(tourists_data)
 dev_Indicator_clean = data_selection(dev_Indicator)
-inbound_tourists_exp_clean = data_selection(tourists_data_exp)
+outbound_tourists_clean = data_selection(tourists_data_exp)
 
 inbound_tourists_stack = reshape_data(inbound_tourists_clean)
 dev_Indicator_stack = reshape_data(dev_Indicator_clean)
-inbound_tourists_exp_stack = reshape_data(inbound_tourists_exp_clean)
+outbound_tourists_stack = reshape_data(outbound_tourists_clean)
+
+df = (inbound_tourists_stack.merge(dev_Indicator_stack, on=['Country Code', 'Year', 'Country Name'])).merge(outbound_tourists_stack, on=['Country Code', 'Year', 'Country Name'])
+
+df = df.rename(columns={'Amount_x': 'inbound_tourists', 'Amount_y' : 'Dev_Indice', 'Amount' : 'outbound_tourists'})
 
 inbound_tourists_stack.to_csv('inbound_tourists_stack.csv')
 dev_Indicator_stack.to_csv('dev_Indicator_stack.csv')
-inbound_tourists_exp_stack.to_csv('inbound_tourists_exp_stack.csv')
+outbound_tourists_stack.to_csv('outbound_tourists_stack.csv')
+df.to_csv('Processed_Data.csv')
+
+
+
