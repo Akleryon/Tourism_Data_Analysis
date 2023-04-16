@@ -45,6 +45,5 @@ inbound_tourists_stack.to_csv('inbound_tourists_stack.csv')
 dev_Indicator_stack.to_csv('dev_Indicator_stack.csv')
 outbound_tourists_stack.to_csv('outbound_tourists_stack.csv')
 df.to_csv('Processed_Data.csv')
-
-
+df.to_excel('Processed_Data.xlsx')
 
